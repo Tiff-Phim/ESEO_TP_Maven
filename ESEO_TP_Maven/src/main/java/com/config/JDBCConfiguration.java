@@ -14,10 +14,10 @@ public class JDBCConfiguration {
 
 		String dbDriver = "com.mysql.jdbc.Driver";
 
-		String BDD = "maven";
+		String BDD = "villeFrance";
 		String url = "jdbc:mysql://localhost:3306/" + BDD;
-		String user = "root";
-		String password = "";
+		String user = "utilisateur";
+		String password = "utilisateur";
 		Connection connection = null;
 		// L'essaie de connexion à votre base de donées
 		try {
