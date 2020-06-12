@@ -8,7 +8,6 @@ public class Ville {
 	private String libelleAcheminement;	
 	private String ligne;
 	private Double latitude;
-	
 	public String getCodeCommune() {
 		return codeCommune;
 	}
