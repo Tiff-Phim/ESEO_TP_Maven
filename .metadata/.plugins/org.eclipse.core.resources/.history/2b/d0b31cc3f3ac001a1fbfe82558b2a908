@@ -37,11 +37,4 @@ public class Ville {
 	private String codePostal;
 	private String libelleAcheminement;	
 	private String ligne;
-	private Double latitude;
-	public Double getLatitude() {
-		return latitude;
-	}
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
 }
