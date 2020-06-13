@@ -49,4 +49,10 @@ class VilleController {
 		return villeBLOService.getVilleByCodePostal(codePostal);
 	}
 	
+	/**
+	 * Permet d'ajouter une ville dans la base de données.
+	 */
+	public void insertVile() {
+		//TODO
+	}
 }
