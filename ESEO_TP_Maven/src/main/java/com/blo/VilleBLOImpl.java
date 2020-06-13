@@ -2,6 +2,7 @@ package com.blo;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,8 @@ public class VilleBLOImpl implements VilleBLO {
 	 * 
 	 * @throws SQLException 
 	 */
-	public ArrayList<Ville> getInfoVille(String monParam) throws SQLException {
-		ArrayList<Ville> listeVille = new ArrayList<Ville>();
+	public List<Ville> getInfoVille(String monParam) throws SQLException {
+		List<Ville> listeVille = new ArrayList<>();
 
 		if (monParam.contentEquals("0")) {
 			listeVille = villeDAO.getAllVilles(monParam);

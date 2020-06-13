@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -124,11 +125,11 @@ public class VilleDAOImpl implements VilleDAO {
 	 * 
 	 * @throws SQLException
 	 */
-	public ArrayList<Ville> getAllVilles(String Param) throws SQLException {
+	public List<Ville> getAllVilles(String param) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet results = null;
-		ArrayList<Ville> listeVille = new ArrayList<Ville>();
+		List<Ville> listeVille = new ArrayList<>();
 		try {
 			connection = JDBCConfiguration.getConnection();
 			preparedStatement = connection.prepareStatement(SELECT_VILLE);

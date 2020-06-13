@@ -9,20 +9,18 @@ import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.dao.VilleDAOImpl;
-
 @Configuration
 public class JDBCConfiguration {
-	
+
 	private static Logger logger = Logger.getLogger(JDBCConfiguration.class.getName());
-	
+
 	@Bean
 	public static Connection getConnection() {
 
 		String dbDriver = "com.mysql.jdbc.Driver";
 
-		String BDD = "villeFrance";
-		String url = "jdbc:mysql://localhost:3306/" + BDD;
+		String bdd = "villeFrance";
+		String url = "jdbc:mysql://localhost:3306/" + bdd;
 		String user = "utilisateur";
 		String pa = "utilisateur";
 		Connection connection = null;
@@ -30,9 +28,7 @@ public class JDBCConfiguration {
 		try {
 			Class.forName(dbDriver);
 			// création de la connexion
-            if(connection == null) {
-            	connection = DriverManager.getConnection(url, user, pa);
-            }
+			connection = DriverManager.getConnection(url, user, pa);
 		} catch (ClassNotFoundException e) {
 			logger.log(Level.WARN, "Erreur pendant la récupération du driver (" + dbDriver + ")" + e.getMessage(), e);
 		} catch (SQLException e1) {
