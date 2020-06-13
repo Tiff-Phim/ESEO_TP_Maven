@@ -1,0 +1,34 @@
+package com.dto;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class VilleTest {
+
+	/* Attributs */
+	private String codeCommune;
+	private String nomCommune;
+	private String codePostal;
+	private String libelleAcheminement;	
+	private String ligne;
+	private Double latitude;
+	private Double longitude;
+	
+	@Test
+	public void testgetCommune() {
+		Ville ville = new Ville();
+		ville.setCodeCommune("01001");
+		
+		assertEquals("Le code commune","01001",ville.getCodeCommune());
+	}
+	
+	@Test
+	public void testsetCommune() {
+		Ville ville = new Ville();
+		ville.setCodeCommune("01002");
+		
+		assertEquals("","01002",ville.getCodeCommune());
+	}
+
+}

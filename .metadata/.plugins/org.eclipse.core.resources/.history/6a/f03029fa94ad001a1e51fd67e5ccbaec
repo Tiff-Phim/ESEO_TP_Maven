@@ -1,0 +1,43 @@
+package com.blo;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.dao.VilleDAO;
+import com.dto.Ville;
+
+@Service
+public class VilleBLOImpl implements VilleBLO {
+
+	@Autowired
+	private VilleDAO villeDAO;
+
+	/**
+	 * Permet de récupérer toutes les informations de toutes les villes de France.
+	 * Le paramètre permet le filtrage par codePostal.
+	 * TODO
+	 * @throws SQLException 
+	 */
+	public ArrayList<Ville> getInfoVille(String monParam) throws SQLException {
+		ArrayList<Ville> listeVille;
+
+		if (monParam != null) {
+			listeVille = villeDAO.getAllVilles(monParam);
+		} else {
+			listeVille = villeDAO.getAllVilles(monParam);
+		}
+		return listeVille;
+	}
+
+	/**
+	 * Récupération d'une ville en fonction de son codePostal.
+	 */
+	public Ville getVilleByCodePostal(String codePostal) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

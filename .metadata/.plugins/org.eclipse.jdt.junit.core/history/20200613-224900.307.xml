@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="VilleTest" project="ESEO_TP_Maven" tests="7" started="7" failures="0" errors="0" ignored="0">
+  <testsuite name="com.dto.VilleTest" time="0.003">
+    <testcase name="testGetterSetterNomCommune" classname="com.dto.VilleTest" time="0.001"/>
+    <testcase name="testGetterSetterLongitude" classname="com.dto.VilleTest" time="0.001"/>
+    <testcase name="testGetterSetterLatitude" classname="com.dto.VilleTest" time="0.0"/>
+    <testcase name="testGetterSetterLigne" classname="com.dto.VilleTest" time="0.0"/>
+    <testcase name="testGetterSetterLibelleAcheminement" classname="com.dto.VilleTest" time="0.0"/>
+    <testcase name="testGetterSetterCodePostal" classname="com.dto.VilleTest" time="0.0"/>
+    <testcase name="testGetterSetterCodeCommune" classname="com.dto.VilleTest" time="0.001"/>
+  </testsuite>
+</testrun>

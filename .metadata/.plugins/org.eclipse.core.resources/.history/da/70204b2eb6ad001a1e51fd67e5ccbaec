@@ -1,0 +1,48 @@
+package com.dto;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class VilleTest {
+	
+	@Test
+	public void testGetterSetterCodeCommune() {
+		Ville ville = new Ville();
+		ville.setCodeCommune("01001");
+		assertEquals("Le code commune attendu est le 01001 le résultat obtenu est : " + ville.getCodeCommune(),"01001",ville.getCodeCommune());
+	}
+	
+	@Test
+	public void testGetterSetterNomCommune() {
+		Ville ville = new Ville();
+		ville.setNomCommune("ARMIX");
+		assertEquals("Le nom attendu est ARMIX, le résultat obtenu est : " + ville.getNomCommune(),"ARMIX",ville.getNomCommune());
+	}
+	
+	@Test
+	public void testGetterSetterCodePostal() {
+		
+	}
+	
+	@Test
+	public void testGetterSetterLibelleAcheminement() {
+		
+	}
+	
+	@Test
+	public void testGetterSetterLigne() {
+		
+	}
+	
+	@Test
+	public void testGetterSetterLatitude() {
+		
+	}
+	
+	@Test
+	public void testGetterSetterLongitude() {
+		
+	}
+
+}
