@@ -16,15 +16,12 @@ public class JDBCConfiguration {
 
 	@Bean
 	public static Connection getConnection() {
-
 		String dbDriver = "com.mysql.jdbc.Driver";
-
 		String bdd = "villeFrance";
 		String url = "jdbc:mysql://localhost:3306/" + bdd;
 		String user = "utilisateur";
 		String pa = "utilisateur";
 		Connection connection = null;
-		// L'essaie de connexion à votre base de donées
 		try {
 			Class.forName(dbDriver);
 			// création de la connexion
