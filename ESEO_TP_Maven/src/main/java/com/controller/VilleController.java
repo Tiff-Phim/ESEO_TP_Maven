@@ -52,7 +52,7 @@ class VilleController {
 	/**
 	 * Permet d'ajouter une ville dans la base de données.
 	 */
-	public void insertVile() {
+	public void insertVille() {
 		//TODO
 	}
 }
