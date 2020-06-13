@@ -4,11 +4,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.dao.VilleDAOImpl;
+
 @Configuration
 public class JDBCConfiguration {
+	
+	private static Logger logger = Logger.getLogger(JDBCConfiguration.class.getName());
+	
 	@Bean
 	public static Connection getConnection() {
 
@@ -17,21 +24,19 @@ public class JDBCConfiguration {
 		String BDD = "villeFrance";
 		String url = "jdbc:mysql://localhost:3306/" + BDD;
 		String user = "utilisateur";
-		String password = "utilisateur";
+		String pa = "utilisateur";
 		Connection connection = null;
 		// L'essaie de connexion à votre base de donées
 		try {
 			Class.forName(dbDriver);
 			// création de la connexion
             if(connection == null) {
-            	connection = DriverManager.getConnection(url, user, password);
+            	connection = DriverManager.getConnection(url, user, pa);
             }
 		} catch (ClassNotFoundException e) {
-			System.out.println("Erreur pendant la récupération du driver (" + dbDriver + ")" + e);
-			e.printStackTrace();
+			logger.log(Level.WARN, "Erreur pendant la récupération du driver (" + dbDriver + ")" + e.getMessage(), e);
 		} catch (SQLException e1) {
-			System.out.println("Erreur pendant la creation de la connexion à la BDD." + e1);
-			e1.printStackTrace();
+			logger.log(Level.WARN, "Erreur pendant la creation de la connexion à la BDD." + e1.getMessage(), e1);
 		}
 		return connection;
 	}
