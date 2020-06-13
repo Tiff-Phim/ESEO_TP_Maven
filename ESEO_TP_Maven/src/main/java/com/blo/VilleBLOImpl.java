@@ -1,5 +1,6 @@
 package com.blo;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +15,29 @@ public class VilleBLOImpl implements VilleBLO {
 	@Autowired
 	private VilleDAO villeDAO;
 
-	public ArrayList<Ville> getInfoVille(String monParam) {
-		ArrayList<Ville> listeVille;
+	/**
+	 * Permet de récupérer toutes les informations de toutes les villes de France.
+	 * Le paramètre permet le filtrage par codePostal.
+	 * 
+	 * @throws SQLException 
+	 */
+	public ArrayList<Ville> getInfoVille(String monParam) throws SQLException {
+		ArrayList<Ville> listeVille = new ArrayList<Ville>();
 
-		if (monParam != null) {
-			listeVille = villeDAO.findAllVilles(monParam);
+		if (monParam.contentEquals("0")) {
+			listeVille = villeDAO.getAllVilles(monParam);
 		} else {
-			listeVille = villeDAO.findAllVilles(monParam);
+			listeVille.add(villeDAO.getVilleByCodePostal(monParam));
 		}
 		return listeVille;
+	}
+
+	/**
+	 * Récupération d'une ville en fonction de son codePostal.
+	 * @throws SQLException 
+	 */
+	public Ville getVilleByCodePostal(String codePostal) throws SQLException {
+		return villeDAO.getVilleByCodePostal(codePostal);
 	}
 
 }

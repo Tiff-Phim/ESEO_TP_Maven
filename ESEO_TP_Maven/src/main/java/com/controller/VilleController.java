@@ -1,9 +1,10 @@
 package com.controller;
 
-
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,18 +21,33 @@ class VilleController {
 	@Autowired
 	VilleBLO villeBLOService;
 
-	// Methode GET
-	@RequestMapping(value = "/ville", method = RequestMethod.GET)
+	/**
+	 * Permet de récupérer toutes les villes de France.
+	 * Il est possible de spécifier ou non le filtrage par codePostal.
+	 * 
+	 * @param codePostal
+	 * @return
+	 * @throws SQLException 
+	 */
+	@RequestMapping(value="/villes",method=RequestMethod.GET)
 	@ResponseBody
-	public ArrayList<Ville> appelGet(@RequestParam(required=false, value="codePostal") String monParam) {
-		System.out.println("Appel GET");
-		
-		System.out.println("mon Param: "+monParam);
+	public ArrayList<Ville> getAll(@RequestParam(required=false, value="codePostal", defaultValue = "0") String codePostal) throws SQLException{
+		return villeBLOService.getInfoVille(codePostal);
+	}
 	
+	/**
+	 * Permet de récupérer une ville à partir de son code postal.
+	 * 
+	 * @param codePostal
+	 * @return
+	 * @throws SQLException 
+	 */
+	@RequestMapping(value = "/villes/{codePostal}", method = RequestMethod.GET)
+	@ResponseBody
+	public Ville getVilleByCodePostal(@PathVariable(required=true,value="codePostal") String codePostal) throws SQLException {	
 		
-		ArrayList<Ville> listeVille = villeBLOService.getInfoVille( monParam); 
-		
-		return listeVille;
+		Ville ville = villeBLOService.getVilleByCodePostal(codePostal);
+		return ville;
 	}
 
 //	// Methode POST
