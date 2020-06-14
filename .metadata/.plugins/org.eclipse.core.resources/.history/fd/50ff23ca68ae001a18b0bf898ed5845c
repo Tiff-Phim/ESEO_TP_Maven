@@ -9,15 +9,13 @@ sonar.projectVersion=1.0
 #sonar.projectVersion=${project.version}
 
 # Source information
-#sonar.sources=src/main
-sonar.sources=.
+sonar.sources=src/main
 sonar.language=java
 # Encoding of the source code. Default is default system encoding
 sonar.sourceEncoding=UTF-8
 
 # Tests
-#sonar.tests=./src/test
-sonar.tests=.
+sonar.tests=./src/test
 sonar.java.binairies=target/classes
 sonar.java.coveragePlugin=jacoco
 sonar.junit.reportsPath=target/surefire-reports
