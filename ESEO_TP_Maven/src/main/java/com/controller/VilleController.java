@@ -52,9 +52,9 @@ class VilleController {
 	/**
 	 * Permet d'ajouter une ville dans la base de données.
 	 */
-	@PostMapping(path = "/users")
+	@PostMapping(path = "/villes")
 	@ResponseBody
 	public String insertVille(@RequestBody Ville ville) {
-		return null;
+		return "Ajout d'une ville";
 	}
 }
