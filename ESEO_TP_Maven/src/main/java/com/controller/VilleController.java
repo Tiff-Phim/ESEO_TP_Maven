@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +18,7 @@ import com.blo.VilleBLO;
 import com.dto.Ville;
 
 @RestController
-//@RequestMapping("/path")
+@RequestMapping("/api")
 class VilleController {
 
 	@Autowired
@@ -32,7 +34,7 @@ class VilleController {
 	 */
 	@GetMapping(path = "/villes")
 	@ResponseBody
-	public List<Ville> getAll(@RequestParam(required=false, value="codePostal", defaultValue = "0") String codePostal) throws SQLException{
+	public List<Ville> getAll(@RequestParam(required=false, value="codePostal", defaultValue = "0") String codePostal) throws SQLException {
 		return villeBLOService.getInfoVille(codePostal);
 	}
 	
@@ -40,7 +42,7 @@ class VilleController {
 	 * Permet de récupérer une ville à partir de son code postal.
 	 * 
 	 * @param codePostal
-	 * @return
+	 * @return ville
 	 * @throws SQLException 
 	 */
 	@GetMapping(path = "/villes/{codePostal}")
@@ -51,10 +53,34 @@ class VilleController {
 	
 	/**
 	 * Permet d'ajouter une ville dans la base de données.
+	 * 
+	 * @throws SQLException 
 	 */
 	@PostMapping(path = "/villes")
 	@ResponseBody
-	public String insertVille(@RequestBody Ville ville) {
-		return "Ajout d'une ville";
+	public Ville insertVille(@RequestBody Ville ville) throws SQLException {
+		return villeBLOService.addVille(ville);
+	}
+	
+	/**
+	 * Permet de mettre à jour une ville.
+	 * 
+	 * @param ville
+	 * @param codePostal
+	 * @throws SQLException
+	 */
+	@PutMapping("/villes/{codePostal}")
+	public Ville replaceVille(@RequestBody Ville ville, @PathVariable String codePostal) throws SQLException {
+		return villeBLOService.updateVille(ville, codePostal);
+	}
+	
+	/**
+	 * Permet la suppression d'une ville.
+	 * 
+	 * @param codePostal
+	 * @throws SQLException
+	 */
+	public void deleteVille(@PathVariable String codePostal) throws SQLException {
+		villeBLOService.deleteVille(codePostal);
 	}
 }

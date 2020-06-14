@@ -14,13 +14,13 @@ import com.dto.Ville;
 public class VilleBLOImpl implements VilleBLO {
 
 	@Autowired
-	private VilleDAO villeDAO;
+	VilleDAO villeDAO;
 
 	/**
 	 * Permet de récupérer toutes les informations de toutes les villes de France.
 	 * Le paramètre permet le filtrage par codePostal.
 	 * 
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public List<Ville> getInfoVille(String monParam) throws SQLException {
 		List<Ville> listeVille = new ArrayList<>();
@@ -35,10 +35,43 @@ public class VilleBLOImpl implements VilleBLO {
 
 	/**
 	 * Récupération d'une ville en fonction de son codePostal.
-	 * @throws SQLException 
+	 * 
+	 * @param codePostal
+	 * @throws SQLException
 	 */
 	public Ville getVilleByCodePostal(String codePostal) throws SQLException {
 		return villeDAO.getVilleByCodePostal(codePostal);
+	}
+
+	/**
+	 * Permet de créer une nouvelle ville.
+	 * 
+	 * @param ville
+	 * @throws SQLException
+	 */
+	public Ville addVille(Ville ville) throws SQLException {
+		return villeDAO.createVille(ville);
+	}
+
+	/**
+	 * Permet la mise à jour d'une ville spécifier en paramètre.
+	 * 
+	 * @param ville
+	 * @param codePostal
+	 * @throws SQLException 
+	 */
+	public Ville updateVille(Ville ville, String codePostal) throws SQLException {
+		return villeDAO.updateVille(ville, codePostal);
+	}
+	
+	/**
+	 * Permet la suppression d'une ville à partir de son codePostal.
+	 * 
+	 * @param codePostal
+	 * @throws SQLException 
+	 */
+	public void deleteVille(String codePostal) throws SQLException {
+		villeDAO.deleteVille(codePostal);
 	}
 
 }
