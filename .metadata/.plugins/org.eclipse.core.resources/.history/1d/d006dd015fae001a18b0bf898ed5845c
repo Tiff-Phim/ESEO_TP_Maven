@@ -1,0 +1,14 @@
+sonar.projectBaseDir=./ESEO_TP_Maven
+# SonarQube instance
+sonar.projectKey=ESEO_TP_Maven
+# name and version displayed in the SonarQube UI
+sonar.projectName=ESEO_TP_Maven
+sonar.projectVersion=1.0
+#sonar.projectVersion=${project.version}
+sonar.sources=.
+sonar.language=java
+sonar.java.binairies=ESEO_TP_Maven/target/classes
+# Encoding of the source code. Default is default system encoding
+sonar.sourceEncoding=UTF-8
+# Debug
+sonar.verbose=true
