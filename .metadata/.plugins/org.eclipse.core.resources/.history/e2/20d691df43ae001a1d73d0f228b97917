@@ -25,7 +25,6 @@
 		<sonar.host.url>
               http://localhost:9000/sonarqube/
         </sonar.host.url>
-        <sonar.java.libraries>target</sonar.java.libraries>
 	</properties>
 
 	<dependencies>
