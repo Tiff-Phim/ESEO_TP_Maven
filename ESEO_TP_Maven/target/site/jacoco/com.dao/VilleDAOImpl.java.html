@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>VilleDAOImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ESEO_TP_Maven</a> &gt; <a href="index.source.html" class="el_package">com.dao</a> &gt; <span class="el_source">VilleDAOImpl.java</span></div><h1>VilleDAOImpl.java</h1><pre class="source lang-java linenums">package com.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
+
+import com.config.JDBCConfiguration;
+import com.dto.Ville;
+
+@Repository
+<span class="nc" id="L19">public class VilleDAOImpl implements VilleDAO {</span>
+
+	// Attributs d'un objet Ville
+	private static final String ATTRIBUT_CODE_COMMUNE = &quot;Code_commune_INSEE&quot;;
+	private static final String ATTRIBUT_NOM_COMMUNE = &quot;Nom_commune&quot;;
+	private static final String ATTRIBUT_CODE_POSTAL = &quot;Code_postal&quot;;
+	private static final String ATTRIBUT_LIBELLE_ACHEMINEMENT = &quot;Libelle_acheminement&quot;;
+	private static final String ATTRIBUT_LIGNE = &quot;Ligne_5&quot;;
+	private static final String ATTRIBUT_LATITUDE = &quot;Latitude&quot;;
+	private static final String ATTRIBUT_LONGITUDE = &quot;Longitude&quot;;
+
+	// Requêtes SQL
+	private static final String SELECT_VILLE = &quot;SELECT * FROM ville_france&quot;;
+	private static final String SELECT_VILLE_CODE_POSTAL = &quot;SELECT * FROM ville_france WHERE Code_postal=?&quot;;
+	private static final String INSERT_VILLE = &quot;INSERT INTO ville_france (Code_commune_INSEE,Nom_commune,Code_postal,&quot;
+			+ &quot;Libelle_acheminement,Ligne_5,Latitude,Longitude) VALUES (?,?,?,?,?,?,?)&quot;;
+	private static final String UPDATE_VILLE = &quot;UPDATE ville_france SET Code_commune_INSEE=?, Nom_commune=?, &quot;
+			+ &quot;Libelle_acheminement=?, Ligne_5=?, Latitude=?, Longitude=? WHERE Code_postal=?&quot;;
+	private static final String DELETE_VILLE_CODE_POSTAL = &quot;DELETE * FROM ville_france WHERE Code_postal=?&quot;;
+
+	// Gestion des erreurs
+	private static final String ECHEC_RECHERCHE_OBJET = &quot;Échec de la recherche de l'objet.&quot;;
+	private static final String ECHEC_CREATION_OBJET = &quot;Échec de la création de l'objet, aucune ligne ajoutée dans la table.&quot;;
+	private static final String ECHEC_MODIFICATION_OBJET = &quot;Échec de la mise à jour de l'objet, aucune ligne modifiée dans la table.&quot;;
+	private static final String ECHEC_SUPPRESSION_OBJET = &quot;Échec de la suppression de l'objet.&quot;;
+
+<span class="nc" id="L45">	private static Logger logger = Logger.getLogger(VilleDAOImpl.class.getName());</span>
+
+	/**
+	 * Fait la correspondance (le mapping) entre une ligne issue de la table
+	 * ville_france (un ResultSet) et un bean Ville.
+	 * 
+	 * @param resultSet la ligne issue de la table ville_france.
+	 * @return ville le bean dont on souhaite faire la correspondance.
+	 * @throws SQLException
+	 */
+	protected Ville recupererVille(ResultSet resultSet) throws SQLException {
+<span class="nc" id="L56">		Ville ville = new Ville();</span>
+<span class="nc" id="L57">		ville.setCodeCommune(resultSet.getString(ATTRIBUT_CODE_COMMUNE));</span>
+<span class="nc" id="L58">		ville.setNomCommune(resultSet.getString(ATTRIBUT_NOM_COMMUNE));</span>
+<span class="nc" id="L59">		ville.setCodePostal(resultSet.getString(ATTRIBUT_CODE_POSTAL));</span>
+<span class="nc" id="L60">		ville.setLibelleAcheminement(resultSet.getString(ATTRIBUT_LIBELLE_ACHEMINEMENT));</span>
+<span class="nc" id="L61">		ville.setLigne(resultSet.getString(ATTRIBUT_LIGNE));</span>
+<span class="nc" id="L62">		ville.setLatitude(resultSet.getDouble(ATTRIBUT_LATITUDE));</span>
+<span class="nc" id="L63">		ville.setLongitude(resultSet.getDouble(ATTRIBUT_LONGITUDE));</span>
+<span class="nc" id="L64">		return ville;</span>
+	}
+
+	/**
+	 * Initialise une requête préparée.
+	 * 
+	 * @param connection          la connexion à la BDD.
+	 * @param sql                 la requête SQL.
+	 * @param returnGeneratedKeys le boolean qui permet de générer des ID ou pas.
+	 * @param objets              la liste d'objets à insérer dans la requête.
+	 * @return preparedStatement la requête préparée initialisée.
+	 * @throws SQLException
+	 */
+	protected static String initialisationRequetePreparee(String sql, Object... objets) {
+<span class="nc" id="L78">		String[] listeSQL = (sql + &quot; &quot;).split(&quot;\\?&quot;);</span>
+<span class="nc" id="L79">		StringBuilder newSQL = new StringBuilder(listeSQL[0]);</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">		for (int i = 0; i &lt; objets.length; i++) {</span>
+<span class="nc" id="L81">			newSQL.append(&quot;\&quot;&quot; + objets[i] + &quot;\&quot;&quot; + listeSQL[i + 1]);</span>
+		}
+<span class="nc" id="L83">		return newSQL.toString().replaceAll(&quot;\&quot;null\&quot;&quot;, &quot;null&quot;);</span>
+	}
+
+	/**
+	 * Ferme la connection.
+	 * 
+	 * @param connection la connection à fermer.
+	 */
+	protected static void fermeture(Connection connection) {
+<span class="nc bnc" id="L92" title="All 2 branches missed.">		if (connection != null) {</span>
+			try {
+<span class="nc" id="L94">				connection.close();</span>
+<span class="nc" id="L95">			} catch (SQLException e) {</span>
+<span class="nc" id="L96">				logger.log(Level.WARN, &quot;Echec de la fermeture de la connexion : &quot; + e.getMessage(), e);</span>
+<span class="nc" id="L97">			}</span>
+		}
+<span class="nc" id="L99">	}</span>
+
+	/**
+	 * Ferme le statement.
+	 * 
+	 * @param statement le statement à fermer.
+	 */
+	protected static void fermeture(Statement statement) {
+<span class="nc bnc" id="L107" title="All 2 branches missed.">		if (statement != null) {</span>
+			try {
+<span class="nc" id="L109">				statement.close();</span>
+<span class="nc" id="L110">			} catch (SQLException e) {</span>
+<span class="nc" id="L111">				logger.log(Level.WARN, &quot;Echec de la fermeture du Statement : &quot; + e.getMessage(), e);</span>
+<span class="nc" id="L112">			}</span>
+		}
+<span class="nc" id="L114">	}</span>
+
+	/**
+	 * Ferme le resultset.
+	 * 
+	 * @param resultSet le resultSet à fermer.
+	 */
+	protected static void fermeture(ResultSet resultSet) {
+<span class="nc bnc" id="L122" title="All 2 branches missed.">		if (resultSet != null) {</span>
+			try {
+<span class="nc" id="L124">				resultSet.close();</span>
+<span class="nc" id="L125">			} catch (SQLException e) {</span>
+<span class="nc" id="L126">				logger.log(Level.WARN, &quot;Echec de la fermeture du ResultSet : &quot; + e.getMessage(), e);</span>
+<span class="nc" id="L127">			}</span>
+		}
+<span class="nc" id="L129">	}</span>
+
+	/**
+	 * Liste toutes les villes présentes dans la base de données.
+	 * 
+	 * @throws SQLException
+	 */
+	public List&lt;Ville&gt; getAllVilles(String param) throws SQLException {
+<span class="nc" id="L137">		Connection connection = null;</span>
+<span class="nc" id="L138">		PreparedStatement preparedStatement = null;</span>
+<span class="nc" id="L139">		ResultSet results = null;</span>
+<span class="nc" id="L140">		List&lt;Ville&gt; listeVille = new ArrayList&lt;&gt;();</span>
+		try {
+<span class="nc" id="L142">			connection = JDBCConfiguration.getConnection();</span>
+<span class="nc" id="L143">			preparedStatement = connection.prepareStatement(SELECT_VILLE);</span>
+<span class="nc" id="L144">			preparedStatement.executeQuery();</span>
+<span class="nc" id="L145">			listeVille.add(recupererVille(results));</span>
+<span class="nc" id="L146">		} catch (SQLException e) {</span>
+<span class="nc" id="L147">			logger.log(Level.WARN, ECHEC_RECHERCHE_OBJET, e);</span>
+		} finally {
+<span class="nc" id="L149">			fermeture(preparedStatement);</span>
+<span class="nc" id="L150">			fermeture(connection);</span>
+<span class="nc" id="L151">		}</span>
+<span class="nc" id="L152">		return listeVille;</span>
+	}
+
+	/**
+	 * Recherche une ville à l'aide de son code postal.
+	 * 
+	 * @param codePostal codePostal de la ville recherchée.
+	 */
+	public Ville getVilleByCodePostal(String codePostal) throws SQLException {
+<span class="nc" id="L161">		Connection connection = null;</span>
+<span class="nc" id="L162">		PreparedStatement preparedStatement = null;</span>
+<span class="nc" id="L163">		ResultSet results = null;</span>
+<span class="nc" id="L164">		Ville ville = new Ville();</span>
+		try {
+<span class="nc" id="L166">			connection = JDBCConfiguration.getConnection();</span>
+<span class="nc" id="L167">			preparedStatement = connection.prepareStatement(</span>
+<span class="nc" id="L168">					initialisationRequetePreparee(SELECT_VILLE_CODE_POSTAL, codePostal), Statement.NO_GENERATED_KEYS);</span>
+<span class="nc" id="L169">			preparedStatement.executeQuery();</span>
+<span class="nc" id="L170">			ville = recupererVille(results);</span>
+<span class="nc" id="L171">		} catch (SQLException e) {</span>
+<span class="nc" id="L172">			logger.log(Level.WARN, ECHEC_RECHERCHE_OBJET, e);</span>
+		} finally {
+<span class="nc" id="L174">			fermeture(preparedStatement);</span>
+<span class="nc" id="L175">			fermeture(connection);</span>
+<span class="nc" id="L176">		}</span>
+<span class="nc" id="L177">		return ville;</span>
+	}
+
+	/**
+	 * Ajout d'une ville dans la base de données.
+	 * 
+	 * @param ville ville à ajoutée dans la base de données.
+	 * @throws SQLException
+	 */
+	public Ville createVille(Ville ville) throws SQLException {
+<span class="nc" id="L187">		Connection connection = null;</span>
+<span class="nc" id="L188">		PreparedStatement preparedStatement = null;</span>
+		try {
+			// création de la connexion
+<span class="nc" id="L191">			connection = JDBCConfiguration.getConnection();</span>
+<span class="nc" id="L192">			preparedStatement = connection.prepareStatement(</span>
+<span class="nc" id="L193">					initialisationRequetePreparee(INSERT_VILLE, ville.getCodeCommune(), ville.getNomCommune(),</span>
+<span class="nc" id="L194">							ville.getCodePostal(), ville.getLibelleAcheminement(), ville.getLigne(),</span>
+<span class="nc" id="L195">							String.valueOf(ville.getLatitude()), String.valueOf(ville.getLongitude())),</span>
+					Statement.NO_GENERATED_KEYS);
+<span class="nc" id="L197">			preparedStatement.executeUpdate();</span>
+<span class="nc" id="L198">		} catch (SQLException e) {</span>
+<span class="nc" id="L199">			logger.log(Level.WARN, ECHEC_CREATION_OBJET, e);</span>
+		} finally {
+<span class="nc" id="L201">			fermeture(preparedStatement);</span>
+<span class="nc" id="L202">			fermeture(connection);</span>
+<span class="nc" id="L203">		}</span>
+<span class="nc" id="L204">		return ville;</span>
+	}
+	
+	/**
+	 * Mise à jour d'une ville.
+	 * 
+	 * @param ville la nouvelle ville
+	 * @param codePostal le code postal de la ville à modifier
+	 */
+	public Ville updateVille(Ville ville, String codePostal) throws SQLException {
+<span class="nc" id="L214">		Connection connection = null;</span>
+<span class="nc" id="L215">		PreparedStatement preparedStatement = null;</span>
+		try {
+<span class="nc" id="L217">			connection = JDBCConfiguration.getConnection();</span>
+<span class="nc" id="L218">			preparedStatement = connection.prepareStatement(initialisationRequetePreparee(UPDATE_VILLE, ville.getCodeCommune(),</span>
+<span class="nc" id="L219">					ville.getNomCommune(), ville.getLibelleAcheminement(), ville.getLigne(), ville.getLatitude(), </span>
+<span class="nc" id="L220">					ville.getLongitude(), codePostal), Statement.RETURN_GENERATED_KEYS);</span>
+<span class="nc" id="L221">			preparedStatement.executeUpdate();</span>
+<span class="nc" id="L222">		} catch (SQLException e) {</span>
+<span class="nc" id="L223">			logger.log(Level.WARN, ECHEC_MODIFICATION_OBJET);</span>
+		} finally {
+<span class="nc" id="L225">			fermeture(preparedStatement);</span>
+<span class="nc" id="L226">			fermeture(connection);</span>
+<span class="nc" id="L227">		}</span>
+<span class="nc" id="L228">		return ville;</span>
+	}
+	
+	/**
+	 * Suppression d'une ville.
+	 * 
+	 * @param ville ville à supprimer.
+	 */
+	public void deleteVille(String codePostal) throws SQLException {
+<span class="nc" id="L237">		Connection connection = null;</span>
+<span class="nc" id="L238">		PreparedStatement preparedStatement = null;</span>
+		// Recherche de la ville à l'aide de son code postal
+<span class="nc" id="L240">		Ville ville = getVilleByCodePostal(codePostal);</span>
+		try {
+<span class="nc" id="L242">			connection = JDBCConfiguration.getConnection();</span>
+<span class="nc" id="L243">			preparedStatement = connection.prepareStatement(initialisationRequetePreparee(DELETE_VILLE_CODE_POSTAL, codePostal), Statement.NO_GENERATED_KEYS);</span>
+<span class="nc" id="L244">			int status = preparedStatement.executeUpdate();</span>
+<span class="nc bnc" id="L245" title="All 2 branches missed.">			if(status == 0) {</span>
+<span class="nc" id="L246">				throw new SQLException();</span>
+			} else {
+<span class="nc" id="L248">				ville.setCodePostal(null);</span>
+			}
+			//
+<span class="nc" id="L251">		} catch(SQLException e) {</span>
+<span class="nc" id="L252">			logger.log(Level.WARN, ECHEC_SUPPRESSION_OBJET);</span>
+		} finally {
+<span class="nc" id="L254">			fermeture(preparedStatement);</span>
+<span class="nc" id="L255">			fermeture(connection);</span>
+<span class="nc" id="L256">		}</span>
+<span class="nc" id="L257">	}	</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

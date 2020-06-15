@@ -2313,3 +2313,15 @@ org.eclipse.jdt.core.JavaModelException: target/classes/com [in ESEO_TP_Maven] i
 2020-06-15 10:45:02,544 [Worker-46: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2020-06-15 10:45:02,546 [Worker-46: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2020-06-15 10:45:02,546 [Worker-46: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-06-15 10:54:05,439 [main] INFO  o.e.m2e.actions.ExecutePomAction - Creating new launch configuration
+2020-06-15 10:55:23,534 [main] INFO  o.e.m2e.actions.ExecutePomAction - Using existing launch configuration
+2020-06-15 10:55:23,599 [Worker-55: Launching ESEO_TP_Maven] INFO  o.e.m.i.launch.MavenLaunchDelegate - /home/tiff/WORSPACE/ESEO_TP_Maven
+2020-06-15 10:55:23,600 [Worker-55: Launching ESEO_TP_Maven] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B clean install
+2020-06-15 11:11:20,953 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-06-15 11:11:20,954 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-06-15 11:11:20,954 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-06-15 11:11:20,958 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-06-15 11:11:20,959 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-06-15 11:11:29,084 [main] INFO  o.e.m2e.actions.ExecutePomAction - Using existing launch configuration
+2020-06-15 11:11:29,161 [Worker-60: Launching ESEO_TP_Maven] INFO  o.e.m.i.launch.MavenLaunchDelegate - /home/tiff/WORSPACE/ESEO_TP_Maven
+2020-06-15 11:11:29,161 [Worker-60: Launching ESEO_TP_Maven] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B clean install
