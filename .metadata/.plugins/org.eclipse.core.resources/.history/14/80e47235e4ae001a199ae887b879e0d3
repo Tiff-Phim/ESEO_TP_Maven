@@ -18,7 +18,7 @@ sonar.sourceEncoding=UTF-8
 # Tests
 #sonar.tests=./src/test
 #sonar.tests=.
-sonar.java.binairies=**/target/classes
+sonar.java.binairies=target/classes
 sonar.java.coveragePlugin=jacoco
 sonar.junit.reportsPath=target/surefire-reports
 sonar.surefire.reportsPath=target/surefire-reports
