@@ -174,6 +174,7 @@ public class VilleDAOImpl implements VilleDAO {
 			logger.log(Level.WARN, ECHEC_RECHERCHE_OBJET, e);
 		} finally {
 			fermeture(preparedStatement);
+			fermeture(results);
 			fermeture(connection);
 		}
 		return ville;
