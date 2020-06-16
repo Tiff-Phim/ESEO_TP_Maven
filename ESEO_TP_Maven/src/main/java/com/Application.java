@@ -12,5 +12,4 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 		logger.log(Level.INFO, "Application demarrée !");
 	}
-	// test du webhook github
 }

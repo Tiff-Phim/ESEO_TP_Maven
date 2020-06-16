@@ -141,8 +141,10 @@ public class VilleDAOImpl implements VilleDAO {
 		try {
 			connection = JDBCConfiguration.getConnection();
 			preparedStatement = connection.prepareStatement(SELECT_VILLE);
-			preparedStatement.executeQuery();
-			listeVille.add(recupererVille(results));
+			results = preparedStatement.executeQuery();
+			while(results.next()) {
+				listeVille.add(recupererVille(results));
+			}
 		} catch (SQLException e) {
 			logger.log(Level.WARN, ECHEC_RECHERCHE_OBJET, e);
 		} finally {
@@ -166,7 +168,7 @@ public class VilleDAOImpl implements VilleDAO {
 			connection = JDBCConfiguration.getConnection();
 			preparedStatement = connection.prepareStatement(
 					initialisationRequetePreparee(SELECT_VILLE_CODE_POSTAL, codePostal), Statement.NO_GENERATED_KEYS);
-			preparedStatement.executeQuery();
+			results = preparedStatement.executeQuery();
 			ville = recupererVille(results);
 		} catch (SQLException e) {
 			logger.log(Level.WARN, ECHEC_RECHERCHE_OBJET, e);

@@ -1,8 +1,8 @@
-/home/tiff/WORSPACE/ESEO_TP_Maven/src/main/java/com/dao/VilleDAOImpl.java
-/home/tiff/WORSPACE/ESEO_TP_Maven/src/main/java/com/dao/VilleDAO.java
-/home/tiff/WORSPACE/ESEO_TP_Maven/src/main/java/com/Application.java
-/home/tiff/WORSPACE/ESEO_TP_Maven/src/main/java/com/blo/VilleBLO.java
-/home/tiff/WORSPACE/ESEO_TP_Maven/src/main/java/com/dto/Ville.java
-/home/tiff/WORSPACE/ESEO_TP_Maven/src/main/java/com/blo/VilleBLOImpl.java
-/home/tiff/WORSPACE/ESEO_TP_Maven/src/main/java/com/config/JDBCConfiguration.java
-/home/tiff/WORSPACE/ESEO_TP_Maven/src/main/java/com/controller/VilleController.java
+/home/tiff/git_repo/ESEO_TP_Maven/ESEO_TP_Maven/src/main/java/com/dto/Ville.java
+/home/tiff/git_repo/ESEO_TP_Maven/ESEO_TP_Maven/src/main/java/com/config/JDBCConfiguration.java
+/home/tiff/git_repo/ESEO_TP_Maven/ESEO_TP_Maven/src/main/java/com/Application.java
+/home/tiff/git_repo/ESEO_TP_Maven/ESEO_TP_Maven/src/main/java/com/blo/VilleBLOImpl.java
+/home/tiff/git_repo/ESEO_TP_Maven/ESEO_TP_Maven/src/main/java/com/blo/VilleBLO.java
+/home/tiff/git_repo/ESEO_TP_Maven/ESEO_TP_Maven/src/main/java/com/controller/VilleController.java
+/home/tiff/git_repo/ESEO_TP_Maven/ESEO_TP_Maven/src/main/java/com/dao/VilleDAOImpl.java
+/home/tiff/git_repo/ESEO_TP_Maven/ESEO_TP_Maven/src/main/java/com/dao/VilleDAO.java
