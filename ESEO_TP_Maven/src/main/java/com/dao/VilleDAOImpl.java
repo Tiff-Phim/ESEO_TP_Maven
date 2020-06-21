@@ -148,6 +148,7 @@ public class VilleDAOImpl implements VilleDAO {
 		} catch (SQLException e) {
 			logger.log(Level.WARN, ECHEC_RECHERCHE_OBJET, e);
 		} finally {
+			fermeture(results);
 			fermeture(preparedStatement);
 			fermeture(connection);
 		}
@@ -175,8 +176,8 @@ public class VilleDAOImpl implements VilleDAO {
 		} catch (SQLException e) {
 			logger.log(Level.WARN, ECHEC_RECHERCHE_OBJET, e);
 		} finally {
-			fermeture(preparedStatement);
 			fermeture(results);
+			fermeture(preparedStatement);
 			fermeture(connection);
 		}
 		return ville;
