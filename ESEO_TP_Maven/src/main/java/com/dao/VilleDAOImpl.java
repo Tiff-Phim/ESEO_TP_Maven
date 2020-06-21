@@ -127,6 +127,30 @@ public class VilleDAOImpl implements VilleDAO {
 			}
 		}
 	}
+	
+	/**
+	 * Ferme le statement et la connection.
+	 * 
+	 * @param statement le statement à fermer.
+	 * @param connection la connection à fermer.
+	 */
+	public static void fermetures(Statement statement, Connection connection) {
+		fermeture(statement);
+		fermeture(connection);
+	}
+
+	/**
+	 * Ferme le resultSet, le statement et la connection.
+	 * 
+	 * @param resultSet le resultSet à fermer.
+	 * @param statement le statement à fermer.
+	 * @param connection la connection à fermer.
+	 */
+	public static void fermetures(ResultSet resultSet, Statement statement, Connection connection) {
+		fermeture(resultSet);
+		fermeture(statement);
+		fermeture(connection);
+	}
 
 	/**
 	 * Liste toutes les villes présentes dans la base de données.
@@ -148,9 +172,7 @@ public class VilleDAOImpl implements VilleDAO {
 		} catch (SQLException e) {
 			logger.log(Level.WARN, ECHEC_RECHERCHE_OBJET, e);
 		} finally {
-			fermeture(results);
-			fermeture(preparedStatement);
-			fermeture(connection);
+			fermetures(results, preparedStatement, connection);
 		}
 		return listeVille;
 	}
@@ -176,9 +198,7 @@ public class VilleDAOImpl implements VilleDAO {
 		} catch (SQLException e) {
 			logger.log(Level.WARN, ECHEC_RECHERCHE_OBJET, e);
 		} finally {
-			fermeture(results);
-			fermeture(preparedStatement);
-			fermeture(connection);
+			fermetures(results, preparedStatement, connection);
 		}
 		return ville;
 	}
@@ -204,8 +224,7 @@ public class VilleDAOImpl implements VilleDAO {
 		} catch (SQLException e) {
 			logger.log(Level.WARN, ECHEC_CREATION_OBJET, e);
 		} finally {
-			fermeture(preparedStatement);
-			fermeture(connection);
+			fermetures(preparedStatement, connection);
 		}
 		return ville;
 	}
@@ -228,8 +247,7 @@ public class VilleDAOImpl implements VilleDAO {
 		} catch (SQLException e) {
 			logger.log(Level.WARN, ECHEC_MODIFICATION_OBJET);
 		} finally {
-			fermeture(preparedStatement);
-			fermeture(connection);
+			fermetures(preparedStatement, connection);
 		}
 		return ville;
 	}
@@ -253,12 +271,10 @@ public class VilleDAOImpl implements VilleDAO {
 			} else {
 				ville.setCodePostal(null);
 			}
-			//
 		} catch(SQLException e) {
 			logger.log(Level.WARN, ECHEC_SUPPRESSION_OBJET);
 		} finally {
-			fermeture(preparedStatement);
-			fermeture(connection);
+			fermetures(preparedStatement, connection);
 		}
 	}	
 }
