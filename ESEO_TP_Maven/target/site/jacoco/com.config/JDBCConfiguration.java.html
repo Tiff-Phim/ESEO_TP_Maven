@@ -10,13 +10,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class JDBCConfiguration {
+<span class="nc" id="L13">public class JDBCConfiguration {</span>
 
 <span class="nc" id="L15">	private static Logger logger = Logger.getLogger(JDBCConfiguration.class.getName());</span>
 
-<span class="nc" id="L17">	private JDBCConfiguration() {</span>
-<span class="nc" id="L18">		throw new IllegalStateException(&quot;JDBCConfiguration class&quot;);</span>
-	}
+//	private JDBCConfiguration() {
+//		throw new IllegalStateException(&quot;JDBCConfiguration class&quot;);
+//	}
 
 	@Bean
 	public static Connection getConnection() {

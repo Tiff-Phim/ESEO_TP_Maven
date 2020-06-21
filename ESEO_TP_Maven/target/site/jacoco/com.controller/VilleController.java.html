@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,7 @@ import com.dto.Ville;
 
 @RestController
 @RequestMapping(&quot;/api&quot;)
-<span class="nc" id="L22">class VilleController {</span>
+<span class="nc" id="L23">class VilleController {</span>
 
 	@Autowired
 	VilleBLO villeBLOService;
@@ -35,7 +36,7 @@ import com.dto.Ville;
 	@GetMapping(path = &quot;/villes&quot;)
 	@ResponseBody
 	public List&lt;Ville&gt; getAll(@RequestParam(required=false, value=&quot;codePostal&quot;, defaultValue = &quot;0&quot;) String codePostal) throws SQLException {
-<span class="nc" id="L38">		return villeBLOService.getInfoVille(codePostal);</span>
+<span class="nc" id="L39">		return villeBLOService.getInfoVille(codePostal);</span>
 	}
 	
 	/**
@@ -48,7 +49,7 @@ import com.dto.Ville;
 	@GetMapping(path = &quot;/villes/{codePostal}&quot;)
 	@ResponseBody
 	public Ville getVilleByCodePostal(@PathVariable(required=true,value=&quot;codePostal&quot;) String codePostal) throws SQLException {	
-<span class="nc" id="L51">		return villeBLOService.getVilleByCodePostal(codePostal);</span>
+<span class="nc" id="L52">		return villeBLOService.getVilleByCodePostal(codePostal);</span>
 	}
 	
 	/**
@@ -59,7 +60,7 @@ import com.dto.Ville;
 	@PostMapping(path = &quot;/villes&quot;)
 	@ResponseBody
 	public Ville insertVille(@RequestBody Ville ville) throws SQLException {
-<span class="nc" id="L62">		return villeBLOService.addVille(ville);</span>
+<span class="nc" id="L63">		return villeBLOService.addVille(ville);</span>
 	}
 	
 	/**
@@ -71,7 +72,7 @@ import com.dto.Ville;
 	 */
 	@PutMapping(&quot;/villes/{codePostal}&quot;)
 	public Ville replaceVille(@RequestBody Ville ville, @PathVariable String codePostal) throws SQLException {
-<span class="nc" id="L74">		return villeBLOService.updateVille(ville, codePostal);</span>
+<span class="nc" id="L75">		return villeBLOService.updateVille(ville, codePostal);</span>
 	}
 	
 	/**
@@ -80,8 +81,9 @@ import com.dto.Ville;
 	 * @param codePostal
 	 * @throws SQLException
 	 */
+	@DeleteMapping(&quot;/villes/{codePostal}&quot;)
 	public void deleteVille(@PathVariable String codePostal) throws SQLException {
-<span class="nc" id="L84">		villeBLOService.deleteVille(codePostal);</span>
-<span class="nc" id="L85">	}</span>
+<span class="nc" id="L86">		villeBLOService.deleteVille(codePostal);</span>
+<span class="nc" id="L87">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

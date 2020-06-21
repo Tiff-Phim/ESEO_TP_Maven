@@ -160,16 +160,18 @@ public class VilleDAOImpl implements VilleDAO {
 	 * @param codePostal codePostal de la ville recherchée.
 	 */
 	public Ville getVilleByCodePostal(String codePostal) throws SQLException {
+		Ville ville = new Ville();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet results = null;
-		Ville ville = new Ville();
 		try {
 			connection = JDBCConfiguration.getConnection();
 			preparedStatement = connection.prepareStatement(
 					initialisationRequetePreparee(SELECT_VILLE_CODE_POSTAL, codePostal), Statement.NO_GENERATED_KEYS);
 			results = preparedStatement.executeQuery();
-			ville = recupererVille(results);
+			while(results.next()) {
+				ville = recupererVille(results);
+			}
 		} catch (SQLException e) {
 			logger.log(Level.WARN, ECHEC_RECHERCHE_OBJET, e);
 		} finally {

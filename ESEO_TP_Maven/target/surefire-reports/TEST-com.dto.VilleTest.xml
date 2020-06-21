@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.dto.VilleTest" time="0.009" tests="7" errors="0" skipped="0" failures="0">
+<testsuite name="com.dto.VilleTest" time="0.001" tests="7" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64"/>
@@ -24,13 +24,13 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Linux"/>
-    <property name="classworlds.conf" value="/home/tiff/TWIC_workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf7201636206375867407.tmp"/>
+    <property name="classworlds.conf" value="/home/tiff/TWIC_workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf250915767839629660.tmp"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="5.3.0-53-generic"/>
+    <property name="os.version" value="5.3.0-59-generic"/>
     <property name="user.home" value="/home/tiff"/>
     <property name="user.timezone" value="Europe/Paris"/>
     <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
@@ -41,7 +41,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="/usr/lib/jvm/java-8-openjdk-amd64/jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -B clean install"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -B install"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
@@ -59,11 +59,11 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="testGetterSetterNomCommune" classname="com.dto.VilleTest" time="0.002"/>
-  <testcase name="testGetterSetterLongitude" classname="com.dto.VilleTest" time="0.003"/>
+  <testcase name="testGetterSetterNomCommune" classname="com.dto.VilleTest" time="0.001"/>
+  <testcase name="testGetterSetterLongitude" classname="com.dto.VilleTest" time="0"/>
   <testcase name="testGetterSetterLatitude" classname="com.dto.VilleTest" time="0"/>
   <testcase name="testGetterSetterLigne" classname="com.dto.VilleTest" time="0"/>
   <testcase name="testGetterSetterLibelleAcheminement" classname="com.dto.VilleTest" time="0"/>
   <testcase name="testGetterSetterCodePostal" classname="com.dto.VilleTest" time="0"/>
-  <testcase name="testGetterSetterCodeCommune" classname="com.dto.VilleTest" time="0.004"/>
+  <testcase name="testGetterSetterCodeCommune" classname="com.dto.VilleTest" time="0"/>
 </testsuite>
