@@ -14,9 +14,9 @@ public class JDBCConfiguration {
 
 	private static Logger logger = Logger.getLogger(JDBCConfiguration.class.getName());
 
-//	private JDBCConfiguration() {
-//		throw new IllegalStateException("JDBCConfiguration class");
-//	}
+	private JDBCConfiguration() {
+		throw new IllegalStateException("JDBCConfiguration class");
+	}
 
 	@Bean
 	public static Connection getConnection() {
